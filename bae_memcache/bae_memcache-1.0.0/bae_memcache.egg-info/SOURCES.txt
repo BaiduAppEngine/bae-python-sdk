@@ -1,0 +1,12 @@
+MANIFEST.in
+setup.py
+bae_memcache/__init__.py
+bae_memcache/_mcpack.so
+bae_memcache/cache.py
+bae_memcache/mcpack.py
+bae_memcache/nshead.py
+bae_memcache.egg-info/PKG-INFO
+bae_memcache.egg-info/SOURCES.txt
+bae_memcache.egg-info/dependency_links.txt
+bae_memcache.egg-info/requires.txt
+bae_memcache.egg-info/top_level.txt

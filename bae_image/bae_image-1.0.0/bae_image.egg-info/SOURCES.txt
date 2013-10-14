@@ -1,0 +1,8 @@
+setup.py
+bae_image/__init__.py
+bae_image/image.py
+bae_image.egg-info/PKG-INFO
+bae_image.egg-info/SOURCES.txt
+bae_image.egg-info/dependency_links.txt
+bae_image.egg-info/requires.txt
+bae_image.egg-info/top_level.txt
