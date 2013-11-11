@@ -51,7 +51,7 @@ BAE3.0中开发者只需在应用代码中添加requirements.txt，并指定bae_
         return base64.b64decode(body)
     
     def test_img_annotate():
-        img = BaeImage()
+        img = BaeImage("api_key", "secret_key", "image_addr")
         
         ### 设置待处理图片
         img.setSource("http://www.baidu.com/img/baidu_sylogo1.gif")
@@ -72,7 +72,7 @@ BAE3.0中开发者只需在应用代码中添加requirements.txt，并指定bae_
         return base64.b64decode(body)
     
     def test_img_qrcode():
-        img = BaeImage()
+        img = BaeImage("api_key", "secret_key", "image_addr")
         
         ### 设置二维码文本
         img.setQRCodeText('bae')
@@ -91,7 +91,7 @@ BAE3.0中开发者只需在应用代码中添加requirements.txt，并指定bae_
     
     
     def test_img_composite():
-        img = BaeImage()
+        img = BaeImage("api_key", "secret_key", "image_addr")
         
         ### 设置待处理图片0
         img.setSource("http://www.baidu.com/img/baidu_sylogo1.gif")
@@ -118,7 +118,7 @@ BAE3.0中开发者只需在应用代码中添加requirements.txt，并指定bae_
         return base64.b64decode(body)
     
     def test_vcode():
-        img = BaeImage()
+        img = BaeImage("api_key", "secret_key", "image_addr")
         
         ### 生成一个验证码，返回值中可获取密文vcode_str和验证码图片链接imgurl
         ret = img.generateVCode(5, 3)
@@ -141,278 +141,179 @@ BAE3.0中开发者只需在应用代码中添加requirements.txt，并指定bae_
 
 接口列表
 --------
+:: 
 
-.. method :: __init__(self, image_source = "")
-
-   构造函数, 可指定需要处理的图片url
-
-   image_source(str): 待处理图片url, 长度不超过2048字节
-
-.. method :: setSource(self, image_source) 
-
+   setSource(self, image_source) 
    设置待处理图片url
-
    image_source(str): 待处理图片url, 长度不超过2048字节
-
-.. method :: setZooming(self, zooming_type, value, height_value = 0)
-
+		      
+   setZooming(self, zooming_type, value, height_value = 0)
    设置目标图片尺寸 
-
    zooming_type(int): 尺寸类型, 包括BaeImage.ZOOMING_TYPE_HEIGHT高度:1, BaeImage.ZOOMING_TYPE_WIDTH宽度:2, BaeImage.ZOOMING_TYPE_PIXELS像素:3, BaeImage.ZOOMING_TYPE_UNRATIO非等比缩放时高度
-
    value(int): 尺寸大小, 高度、宽度调整范围[0-10000], 像素调整范围[0-100000000]
-   
    height_value(int): 高度值非等比缩放, 高度范围[0-10000]  
 
-.. method :: setCropping(self, x, y, width, height)
-
+   setCropping(self, x, y, width, height)
    设置裁剪参数
-
    x(int): 裁剪起始像素x坐标（0-10000像素位置）
-
    y(int): 裁剪起始像素y坐标（0-10000像素位置）
-
    width(int): 缩放后的宽度（0-10000像素）
-
    height(int): 缩放后的高度（0-10000像素）
 
-.. method :: setRotation(self, degree)
-
+   setRotation(self, degree)
    设置旋转角度（顺时针旋转）
-
    degree(int): 旋转角度（0-360度）
 
-.. method :: setHue(self, hue)
-
+   setHue(self, hue)
    设置灰度级别
-
    hue(int): 灰度级别（1-100）
 
-.. method :: setLightness(self, lightness)
-
+   setLightness(self, lightness)
    设置亮度级别
-
    lightness(int): 亮度级别（1以上）
 
-.. method :: setContrast(self, contrast)
-
+   setContrast(self, contrast)
    设置对比度
+   contrast(int): 对比度级别（0为降低对比度，1为增强对比度）
 
-   lightness(int): 对比度级别（0为降低对比度，1为增强对比度）
-
-.. method :: setSharpness(self, sharpness)
-
+   setSharpness(self, sharpness)
    设置锐化级别
-
    sharpness(int): 锐化级别（1-200，1-100为锐化级别，100-200为模糊级别）
 
-.. method :: setSaturation(self, saturation)
-
+   setSaturation(self, saturation)
    设置色彩饱和度级别
-
    saturation(int): 色彩饱和度级别（1-100）
 
-.. method :: setTranscoding(self, image_type, quality = 60)
-
+   setTranscoding(self, image_type, quality = 60)
    设置目标图片格式
-
    image_type(str): 目标图片格式，“gif”，“jpg”，“png”, "webp"
-
    quality(int): 图片压缩质量（0-100，默认60）
 
-.. method :: setQuality(self, quality = 60)
-
+   setQuality(self, quality = 60)
    设置图片压缩质量
-
    quality(int): 图片压缩质量（0-100，默认60）
 
-.. method :: setGetGifFirstFrame(self)
-
+   setGetGifFirstFrame(self)
    设置获取gif图片第一帧
 
-.. method :: setAutoRotate(self)
-
+   setAutoRotate(self)
    设置自动校准
 
-.. method :: clearOperations(self)
-
+   clearOperations(self)
    清除所有操作, 不包含待处理图片的url
 
-.. method :: reset(self)
-
+   reset(self)
    清除所有参数, 包含待处理图片的url
 
-.. method :: horizontalFlip(self)
-
+   horizontalFlip(self)
    水平翻转
 
-.. method :: verticalFlip(self)
-
+   verticalFlip(self)
    垂直翻转
 
-.. method :: setAnnotateText(self, text)
-
+   setAnnotateText(self, text)
    [水印处理]设置水印文本
-
    text(basestring): 待添加水印的文字,UTF-8编码,范围:1-500字符
 
-.. method :: setAnnotateOpacity(self, opacity)
-
+   setAnnotateOpacity(self, opacity)
    [水印处理]设置文字透明度
-
    opacity(float): 透明度大小,范围:0-1
 
-.. method :: setAnnotateFont(self, name, size, color)
-
+   setAnnotateFont(self, name, size, color)
    [水印处理]设置水印字体样式
-
    name(int): 字体样式,支持宋体0、楷体1、黑体2、微软雅黑3、Arial4
-
    size(int): 字体大小,范围:0-1000,默认为25
-
    color(basestring):  字体颜色,范围:标准6位RGB色,默认为黑色('000000')
 
-.. method :: setAnnotatePos(self, x_offset, y_offset)
-
+   setAnnotatePos(self, x_offset, y_offset)
    [水印处理]设置水印文字位置
-
    x_offset(int): X坐标位置,范围:0-图片宽度
-
    y_offset(int): Y坐标位置,范围:0-图片高度
 
-.. method :: setAnnotateOutputCode(self, output_code)
-
+   setAnnotateOutputCode(self, output_code)
    [水印处理]设置图片输出格式
-
    output_code(int): 支持JPG0、GIF1、BMP2、PNG3、WEBP4
 
-.. method :: setAnnotateQuality(self, quality)
-
+   setAnnotateQuality(self, quality)
    [水印处理]设置图片压缩质量
-
    quality(int): 范围:0-100,默认为80
 
-.. method :: setQRCodeText(self, text)
-
+   setQRCodeText(self, text)
    [二维码处理]设置二维码文本信息
-
    text(basestring): 待生成二维码的文字,UTF-8编码,范围:1-500个字符
 
-.. method :: setQRCodeVersion(self, version)
-
+   setQRCodeVersion(self, version)
    [二维码处理]设置二维码的版本信息
-
    version(int): 版本大小, 范围:0-30
 
-.. method :: setQRCodeSize(self, size)
-
+   setQRCodeSize(self, size)
    [二维码处理]设置生成二维码的尺寸
-
    size(int): 尺寸大小,范围:1-100
 
-.. method :: setQRCodeLevel(self, level)
-
+   setQRCodeLevel(self, level)
    [二维码处理]设置二维码的纠错级别
-
    level(int): 纠错级别,范围:1-4
 
-.. method :: setQRCodeMargin(self, margin)
-
+   setQRCodeMargin(self, margin)
    [二维码处理]设置二维码的边缘宽度
-
    margin(int): 边缘大小,范围:1-100
 
-.. method :: setQRCodeForeground(self, foreground)
-
+   setQRCodeForeground(self, foreground)
    [二维码处理]设置二维码的背景颜色
-
    foreground(basestring): 标准6位RGB色,默认是白色('FFFFFF')
 
-.. method :: setQRCodeBackground(self, background)
-
+   setQRCodeBackground(self, background)
    [二维码处理]设置二维码的前景颜色
-
    foreground(basestring): 标准6位RGB色,默认是黑色('000000')
 
-.. method :: setCompositeSource(self, image_source)
-
+   setCompositeSource(self, image_source)
    [图片合成处理]设置需要与setSource指定的待处理图片合成的图片源
-
    image_source(basestring): 图片的url,长度范围:1-2048.支持http协议
 
-.. method :: setCompositePos(self, x_offset, y_offset, img_key = 0)
-
+   setCompositePos(self, x_offset, y_offset, img_key = 0)
    [图片合成处理]设置图片相对于锚点的位置
-
    x_offset(int): 相对于锚点的水平位置,范围:0-图片宽度
- 
    y_offset(int): 相对于锚点的垂直位置,范围:0-图片高度
-
    img_key(int): 指定操作的图片，目前支持两张图片的合成处理(setSource指定的图片img_key为0，setCompositeSource指定的图片img_key为1)
 
-.. method :: setCompositeOpacity(self, opacity, img_key = 0)
-
+   setCompositeOpacity(self, opacity, img_key = 0)
    [图片合成处理]设置图片透明度
-
    opacity(float): 透明度大小,范围:0-1(0表示不透明,1表示完全透明)
-
    img_key(int): 指定操作的图片，目前支持两张图片的合成处理(setSource指定的图片img_key为0，setCompositeSource指定的图片img_key为1)
 
-.. method :: setCompositeAnchor(self, anchor, img_key = 0)
-
+   setCompositeAnchor(self, anchor, img_key = 0)
    [图片合成处理]设置图片的锚点位置
-
    anchor(int): 锚点位置,范围:0-8,对应于"田"字的九个点,默认为0
-
    img_key(int): 指定操作的图片，目前支持两张图片的合成处理(setSource指定的图片img_key为0，setCompositeSource指定的图片img_key为1)
 
-.. method :: setCompositeCanvas(self, canvas_width, canvas_height)
-
+   setCompositeCanvas(self, canvas_width, canvas_height)
    [图片合成处理]设置合成的画布宽，高
-
    canvas_width(int): 画布宽度,范围:0-10000,默认为1000
-
    canvas_height(int): 画布高度,范围:0-10000,默认为1000
 
-.. method :: setCompositeOutputCode(self, output_code)
-
+   setCompositeOutputCode(self, output_code)
    [图片合成处理]设置合成后图片输出格式
-
    output_code(int): 图片输出格式,支持JPG0、GIF1、BMP2、PNG3
 
-.. method :: setCompositeQuality(self, quality)
-
+   setCompositeQuality(self, quality)
    [图片合成处理]设置合成后图片压缩质量
-
    quality(int): 范围:0-100,默认为80
 
-.. method :: generateVCode(self, vcode_len = 4, vcode_pattern = 0)
-
+   generateVCode(self, vcode_len = 4, vcode_pattern = 0)
    [验证码处理]生成验证码操作，成功返回如下格式信息{{u'response_params': {u'status': 0, u'vcode_str': u'验证码密文信息', u'imgurl'：u'验证码url', u'str_reason': u''}, u'request_id': 4205671600}
-
    vcode_len(int): 验证码的长度，支持4位和5位，默认4位
-
    vcode_pattern(int): 验证码的类型（干扰程度）,范围：0-3,默认0
 
-
-.. method :: verifyVCode(self, vcode_input, vcode_secret)
-
+   verifyVCode(self, vcode_input, vcode_secret)
    [验证码处理]校验操作(有效时间为120秒)，成功返回如下格式信息{u'response_params': {u'status': 0, u'str_reason': u'验证结果'}, u'request_id': 4205671600})
-
    vcode_input(basestring): 验证码的输入,支持4位和5位
-
    vcode_secret(basestring): 验证码的密文
 
-.. method :: process(self)
-
+   process(self)
    调用服务执行图片处理操作, 成功返回图片处理响应数据,失败抛出异常. 图片处理响应数据形如:
-   
-::
-    
    {u'response_params': {u'image_data': u'/9j/4AAQSkZJRgABAQEASABIAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAABAAEDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAj/xAAUEAEAAAAAAAAAAAAAAAAAAAAA/8QAFAEBAAAAAAAAAAAAAAAAAAAAAP/EABQRAQAAAAAAAAAAAAAAAAAAAAD/2gAMAwEAAhEDEQA/AKYAB//Z'}, u'request_id': 2441434200} 
 
-.. method :: getRequestId(self)
-
+   getRequestId(self)
    获取上次调用的request_id
 
 
