@@ -18,7 +18,7 @@ BAE3.0中，开发者只需在应用代码中添加requirements.txt，并指定b
      
     def test_cache():
         ### 开发者可使用给出的下载链接自行安装使用；同样也可以在requirements.txt中指定依赖bae_memcache使用
-        from bae_memcache.cache import BaeMemcache
+        from bae_memcache import BaeMemcache
           
         ### 创建一个cache
         ### 其中cache_id，cache_addr，api_key， secret_key均需通过管理控制台获取
