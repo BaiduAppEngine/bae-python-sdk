@@ -14,41 +14,41 @@ BAE3.0中，开发者只需在应用代码中添加requirements.txt，并指定b
 --------
 ::
 
-#-*- coding:utf-8 -*-
- 
-def test_cache():
-    ### 开发者可使用给出的下载链接自行安装使用；同样也可以在requirements.txt中指定依赖bae_memcache使用
-    from bae_memcache.cache import BaeMemcache
+    #-*- coding:utf-8 -*-
+     
+    def test_cache():
+        ### 开发者可使用给出的下载链接自行安装使用；同样也可以在requirements.txt中指定依赖bae_memcache使用
+        from bae_memcache.cache import BaeMemcache
+          
+        ### 创建一个cache
+        ### 其中cache_id，cache_addr，api_key， secret_key均需通过管理控制台获取
+        cache_id = "fUqxFBdrJSizQFSqxGUI"
+        cache_addr = "cache.duapp.com:20243"
+        api_key = "urtgxzMPVigNEtOQF7yzg7C9"
+        secret_key = "1e0jDqkZ7fUwNgFD5LzwPY4YAQURFGYM"
+        cache = BaeMemcache(cache_id, cache_addr, api_key, secret_key)
       
-    ### 创建一个cache
-    ### 其中cache_id，cache_addr，api_key， secret_key均需通过管理控制台获取
-    cache_id = "fUqxFBdrJSizQFSqxGUI"
-    cache_addr = "cache.duapp.com:20243"
-    api_key = "urtgxzMPVigNEtOQF7yzg7C9"
-    secret_key = "1e0jDqkZ7fUwNgFD5LzwPY4YAQURFGYM"
-    cache = BaeMemcache(cache_id, cache_addr, api_key, secret_key)
-  
-    body = []
-    ### 存放一个key，value对
-    if cache.set('key', 'value'):
-        body.append("set key => value success!")
-     
-    ### 获取key对应的value
-    body.append("get %s success!"%cache.get('key'))
-    return body
-      
-def app(environ, start_response):
-    status = '200 OK'
-    headers = [('Content-type', 'text/html')]
-    start_response(status, headers)
-    try:
-        return '<br>'.join(test_cache())
-    except:
-        return 'handle exceptions'
-     
-     
-from bae.core.wsgi import WSGIApplication
-application = WSGIApplication(app)
+        body = []
+        ### 存放一个key，value对
+        if cache.set('key', 'value'):
+            body.append("set key => value success!")
+         
+        ### 获取key对应的value
+        body.append("get %s success!"%cache.get('key'))
+        return body
+          
+    def app(environ, start_response):
+        status = '200 OK'
+        headers = [('Content-type', 'text/html')]
+        start_response(status, headers)
+        try:
+            return '<br>'.join(test_cache())
+        except:
+            return 'handle exceptions'
+         
+         
+    from bae.core.wsgi import WSGIApplication
+    application = WSGIApplication(app)
 
 接口列表
 -------------
