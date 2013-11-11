@@ -29,89 +29,55 @@ BAE3.0中，开发者只需在应用代码中添加requirements.txt，并指定b
 ::
 
    add(self, key, value, time = 0, min_compress_len = 0)
-
    往cache中添加key关联的值,成功返回True,失败返回False
-
    key: 存储的key, str类型
-
    value: 存储的value, mixed类型
-
    time: 以秒为单位的失效时间, int类型，默认为0，永久保存
-
    min_compress_len: 用zlib来压缩value, 现在不起作用,int类型
 
    get(self, key)
-
    获取cache中存储的key的值,失败或key未找到的时候返回None,成功时返回查询到的value
-
    key: 要获取的key,str类型
 
    set(self, key, value, time = 0, min_compress_len = 0)
-
    设置cache中key的值为value，成功返回True，失败返回False
-   
    key: 存储的key，str类型
-
    value: 存储的value，mixed类型
-
    time: 以秒为单位的失效时间，int类型，默认为0，永久保存
-
    min_compress_len: 用zlib来压缩value，现在不起作用，int类型
 
    get_multi(self, keys, key_prefix = None)
-
    获取cache中多个key的value值, 失败或keys未找到的时候返回{},成功时返回查询到的values
-
    keys: 要获取的key，str类型
-
    key_prefix: keys的统一前缀，str类型
   
    set_multi(self, mapping, time = 0, key_prefix = None, min_compress_len = 0)
-
    设置cache中的多个key对应的value值, 返回set失败的key组成的列表, 成功时为[]
-  
    mapping: 存储的key，value对，dict类型
-
    time: 以秒为单位的失效时间，int类型，默认为0，永久保存
-   
    key_prefix: keys的统一前缀，str类型
-   
    min_compress_len: 用zlib来压缩value，现在不起作用，int类型
 
    replace(self, key, value, time = 0, min_compress_len = 0)
-
    替换cache中key的值为value, 成功返回True，失败返回False
-
    key: 存储的key，str类型
-
    value: 存储的value，mixed类型
-
    time: 以秒为单位的失效时间，int类型，默认为0，永久保存
-
    min_compress_len: 用zlib来压缩value，现在不起作用，int类型    
 
    incr(self, key, delta = 1)
-   
    增加cache中存储的key的值, 成功时返回新的元素值，失败时返回None
-
    key: 要操作的key，str类型
-
    delta: 增加的值，默认为1. 如果指定的key对应的元素不是数值类型并且不能被转换为数值， 会将此值修改为delta，int类型
    
    decr(self, key, delta = 1)
-
    减小cache中存储的key的值, 成功时返回新的元素值，失败时返回None
-
    key: 要操作的key，str类型
-   
    delta: 减少的值，默认为1。如果指定的key对应的元素不是数值类型并且不能被转换为数值，会将此值修改为delta，如果运算结果小于0，则返回的结果是0
 
    delete(self, key, time = 0)
-
    删除cache中存储的key的值, 成功返回True，失败返回False
-
    key: 要操作的key，str类型
-   
    time: 延迟删除时间，单位秒，默认为0
 
 服务限制
