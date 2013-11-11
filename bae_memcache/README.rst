@@ -17,9 +17,8 @@ BAE3.0中，开发者只需在应用代码中添加requirements.txt，并指定b
     ### BAE3.0中使用如下方式导入
     from bae_memcache import BaeMemcache
     
-    cache = BaeMemcache()
     ### BAE3.0中需注意使用如下方式初始化, 其中cache_id，cache_addr，api_key， secret_key均需通过管理控制台获取
-    ### cache = BaeMemcache("cache_id", "cache_addr", "api_key", "secret_key")
+    cache = BaeMemcache("cache_id", "cache_addr", "api_key", "secret_key")
     
     cache.set('key', 'value')
     cache.get('key')
