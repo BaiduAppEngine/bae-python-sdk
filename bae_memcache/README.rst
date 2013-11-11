@@ -13,6 +13,7 @@ BAE3.0中，开发者只需在应用代码中添加requirements.txt，并指定b
 使用示例
 --------
 ::
+
     ### BAE3.0中使用如下方式导入
     from bae_memcache import BaeMemcache
     
