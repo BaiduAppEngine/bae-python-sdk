@@ -23,8 +23,6 @@ BAE3.0中开发者只需在应用代码中添加requirements.txt，并指定bae_
         
 	### 设置待处理图片
         img.setSource("http://www.baidu.com/img/baidu_sylogo1.gif")
-        
-	### BAE3.0中需注意使用如下方式初始化, 其中api_key， secret_key，bae_image_addr均需通过管理控制台获取
     
         ### 设置目标图片尺寸
         img.setZooming(BaeImage.ZOOMING_TYPE_PIXELS, 100000)
